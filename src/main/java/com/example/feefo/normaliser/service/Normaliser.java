@@ -4,9 +4,9 @@ import com.example.feefo.normaliser.factory.NormaliserAlgorithmType;
 import com.example.feefo.normaliser.factory.NormaliserFactory;
 import com.example.feefo.normaliser.type.NormaliserAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class Normaliser {
 
     @Autowired

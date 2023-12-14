@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest(classes = {FeefoApplication.class})
-public class NormaliserServiceTest {
+public class NormaliserTest {
 
     @Autowired
     private Normaliser n;

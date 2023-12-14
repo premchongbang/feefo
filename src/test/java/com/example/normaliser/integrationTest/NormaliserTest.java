@@ -1,4 +1,4 @@
-package com.example.normaliser;
+package com.example.normaliser.integrationTest;
 
 import com.example.feefo.FeefoApplication;
 import com.example.feefo.normaliser.factory.NormaliserAlgorithmType;

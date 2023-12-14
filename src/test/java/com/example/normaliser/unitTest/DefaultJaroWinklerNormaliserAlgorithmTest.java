@@ -1,4 +1,4 @@
-package com.example.normaliser;
+package com.example.normaliser.unitTest;
 
 import com.example.feefo.FeefoApplication;
 import com.example.feefo.normaliser.type.DefaultJaroWinklerNormaliserAlgorithm;

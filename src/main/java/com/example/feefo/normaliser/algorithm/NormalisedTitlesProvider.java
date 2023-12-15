@@ -23,7 +23,7 @@ public class NormalisedTitlesProvider {
         return new ArrayList<>(normalisedTitles);
     }
 
-    public static void addNormalisedTitle(String title) {
+    public static synchronized  void addNormalisedTitle(String title) {
         if (StringUtils.isEmpty(title)) {
             log.error("Title cannot be empty or null");
             throw new IllegalArgumentException("Title cannot be empty or null");
@@ -32,7 +32,7 @@ public class NormalisedTitlesProvider {
         normalisedTitles.add(title);
     }
 
-    public static void removeNormalisedTitle(String title) {
+    public static synchronized void removeNormalisedTitle(String title) {
         if (StringUtils.isEmpty(title)) {
             log.error("Title cannot be empty or null");
             throw new IllegalArgumentException("Title cannot be empty or null");

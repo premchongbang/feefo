@@ -3,8 +3,8 @@ package com.example.normaliser;
 import com.example.feefo.FeefoApplication;
 import com.example.feefo.normaliser.factory.NormaliserAlgorithmType;
 import com.example.feefo.normaliser.factory.NormaliserFactory;
-import com.example.feefo.normaliser.type.DefaultJaroWinklerNormaliserAlgorithm;
-import com.example.feefo.normaliser.type.NormaliserAlgorithm;
+import com.example.feefo.normaliser.algorithm.types.JaroWinklerNormaliserAlgorithm;
+import com.example.feefo.normaliser.algorithm.NormaliserAlgorithm;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,15 +19,15 @@ public class NormaliserFactoryTest {
     NormaliserFactory nf;
 
     @Test
-    public void testNormaliserFactoryGetDefaultMethod() {
+    public void testNormaliserFactoryGetDefaultNormaliserMethod() {
         NormaliserAlgorithm result = nf.getDefaultNormalizer();
-        assertEquals(result.getClass(), DefaultJaroWinklerNormaliserAlgorithm.class);
+        assertEquals(result.getClass(), JaroWinklerNormaliserAlgorithm.class);
     }
 
     @Test
     public void testNormaliserFactoryGetNormaliserMethod() {
-        NormaliserAlgorithm result = nf.getNormalizer(NormaliserAlgorithmType.DEFAULT_JARO_WINKLER);
-        assertEquals(result.getClass(), DefaultJaroWinklerNormaliserAlgorithm.class);
+        NormaliserAlgorithm result = nf.getNormalizer(NormaliserAlgorithmType.JARO_WINKLER);
+        assertEquals(result.getClass(), JaroWinklerNormaliserAlgorithm.class);
     }
 
     @Test
@@ -43,16 +43,3 @@ public class NormaliserFactoryTest {
         });
     }
 }
-
- class TestNormaliser implements NormaliserAlgorithm {
-
-     @Override
-     public String normalise(String input) {
-         return null;
-     }
-
-     @Override
-     public String normalise(String input, double qualityFactor) {
-         return null;
-     }
- }

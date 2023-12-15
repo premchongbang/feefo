@@ -1,7 +1,8 @@
 package com.example.feefo.normaliser.factory;
 
-import com.example.feefo.normaliser.type.DefaultJaroWinklerNormaliserAlgorithm;
-import com.example.feefo.normaliser.type.NormaliserAlgorithm;
+import com.example.feefo.normaliser.algorithm.types.JaroWinklerNormaliserAlgorithm;
+import com.example.feefo.normaliser.algorithm.types.LevenshteinDistanceAlgorithm;
+import com.example.feefo.normaliser.algorithm.NormaliserAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -13,16 +14,18 @@ import java.util.Map;
 public class NormaliserFactory {
     private NormaliserAlgorithm defaultNormalizer;
 
-    private Map<NormaliserAlgorithmType, NormaliserAlgorithm> normaliserMap = new HashMap<>();
-    public NormaliserFactory(DefaultJaroWinklerNormaliserAlgorithm defaultJaroWinklerNormalizer) {
-        this.defaultNormalizer = defaultJaroWinklerNormalizer;
-        this.normaliserMap.put(NormaliserAlgorithmType.DEFAULT_JARO_WINKLER, defaultJaroWinklerNormalizer);
+    private static Map<NormaliserAlgorithmType, NormaliserAlgorithm> normaliserMap = new HashMap<>();
+
+    public NormaliserFactory(JaroWinklerNormaliserAlgorithm jaroWinklerNormalizer, LevenshteinDistanceAlgorithm levenshteinDistanceAlgorithm) {
+        this.defaultNormalizer = jaroWinklerNormalizer;
+        this.normaliserMap.put(NormaliserAlgorithmType.JARO_WINKLER, jaroWinklerNormalizer);
+        this.normaliserMap.put(NormaliserAlgorithmType.LEVENSHTEIN_DISTANCE, levenshteinDistanceAlgorithm);
     }
 
     public NormaliserAlgorithm getNormalizer(NormaliserAlgorithmType type) {
         NormaliserAlgorithm result = normaliserMap.get(type);
         if (result == null) {
-            log.warn("No normalizer found for type: " + type);
+            log.error("No normalizer found for type: " + type);
         }
 
         return result;
@@ -30,11 +33,13 @@ public class NormaliserFactory {
 
     public void registerNormalizer(NormaliserAlgorithmType type, NormaliserAlgorithm normaliser) {
         if (type == null || normaliser == null) {
-            log.error("Invalid type or normaliser provided");
+            log.warn("Invalid type or normaliser provided");
             throw new IllegalArgumentException("Invalid type or normaliser provided");
         }
 
-        normaliserMap.put(type, normaliser);
+        synchronized (this) {
+            normaliserMap.put(type, normaliser);
+        }
     }
 
     public NormaliserAlgorithm getDefaultNormalizer() {

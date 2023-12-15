@@ -1,4 +1,4 @@
-package com.example.feefo.normaliser.type;
+package com.example.feefo.normaliser.algorithm;
 
 public interface NormaliserAlgorithm {
     String normalise(String input);

@@ -30,7 +30,7 @@ public class NormaliserTest {
 
     @Test
     public void testNormaliseServiceJavaEngineerWithQualityFactorAndType() {
-        String result = n.normalise("Java engineer", 0.2, NormaliserAlgorithmType.DEFAULT_JARO_WINKLER);
+        String result = n.normalise("Java engineer", 0.2, NormaliserAlgorithmType.JARO_WINKLER);
         assertEquals("Software engineer", result);
     }
 
@@ -42,7 +42,7 @@ public class NormaliserTest {
 
     @Test
     public void testNormaliseServiceCSharpEngineerWithType() {
-        String result = n.normalise("C# engineer", NormaliserAlgorithmType.DEFAULT_JARO_WINKLER);
+        String result = n.normalise("C# engineer", NormaliserAlgorithmType.JARO_WINKLER);
         assertEquals("Software engineer", result);
     }
 

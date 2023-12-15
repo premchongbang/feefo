@@ -1,12 +1,12 @@
 package com.example.feefo.normaliser.service;
 
+import com.example.feefo.normaliser.algorithm.NormaliserAlgorithm;
 import com.example.feefo.normaliser.factory.NormaliserAlgorithmType;
 import com.example.feefo.normaliser.factory.NormaliserFactory;
-import com.example.feefo.normaliser.type.NormaliserAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class Normaliser {
 
     @Autowired
@@ -18,7 +18,7 @@ public class Normaliser {
      * @return
      */
     public String normalise(String input) {
-        return normalise(input, NormaliserAlgorithmType.DEFAULT_JARO_WINKLER);
+        return normalise(input, NormaliserAlgorithmType.JARO_WINKLER);
     }
 
     /**
@@ -38,7 +38,7 @@ public class Normaliser {
      * @return
      */
     public String normalise(String input, double qualityFactor) {
-        return normalise(input, qualityFactor, NormaliserAlgorithmType.DEFAULT_JARO_WINKLER);
+        return normalise(input, qualityFactor, NormaliserAlgorithmType.JARO_WINKLER);
     }
 
     /**
